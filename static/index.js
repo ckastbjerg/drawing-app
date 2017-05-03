@@ -98,6 +98,8 @@ function ignore () {
 
   // redraw the line after simplification
   tick();
+
+  send();
 }
 
 
@@ -125,12 +127,11 @@ function tick() {
   path.attr('d', d => line(d)) // Redraw the path:
 }
 
-document.querySelectorAll('#send')[0].addEventListener('click', e => {
+function send() {
   const body = JSON.stringify({
     data: document.querySelectorAll('#sketch')[0].innerHTML,
     ptdata
-  })
-  debugger;
+  });
 
   fetch('svg', {
     method: 'POST',
@@ -140,4 +141,4 @@ document.querySelectorAll('#send')[0].addEventListener('click', e => {
     },
     body
   });
-})
+}
