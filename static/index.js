@@ -44,6 +44,24 @@ touchEvents.forEach(eventName => {
   document.body.addEventListener(eventName, e => e.preventDefault());
 });
 
+// Initial paths
+fetch('ptdata', {
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+})
+.then(result => result.json())
+.then(ptdata => {
+    ptdata.forEach(path => {
+        svg.append('path') // start a new line
+          .data([path])
+          .attr('class', 'line')
+          .attr("stroke", "blue")
+          .attr('d', line);
+    })
+})
+
 
 function listen () {
   drawing = true;
@@ -51,6 +69,7 @@ function listen () {
   path = svg.append('path') // start a new line
     .data([ptdata])
     .attr('class', 'line')
+    .attr("stroke", "blue")
     .attr('d', line);
 
   if (d3.event.type === 'mousedown') {
@@ -109,7 +128,9 @@ function tick() {
 document.querySelectorAll('#send')[0].addEventListener('click', e => {
   const body = JSON.stringify({
     data: document.querySelectorAll('#sketch')[0].innerHTML,
+    ptdata
   })
+  debugger;
 
   fetch('svg', {
     method: 'POST',
