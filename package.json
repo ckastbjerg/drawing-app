@@ -1,0 +1,12 @@
+{
+  "name": "beastknees",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Maciej Pekala <mp@issuu.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "svgo": "^0.7.2"
+  }
+}
